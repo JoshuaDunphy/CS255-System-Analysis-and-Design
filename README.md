@@ -1,101 +1,62 @@
-Project Summary
+# CS 255 Sample Business Requirements Document for an ATM
 
-DriverPass is a startup founded by Liam, aimed at improving DMV test pass rates by offering students online practice exams and on-the-road driving lessons. The client wanted a web-based system that allows:
+> **Note**: The following is a sample of the business requirements document for an ATM system. Use this as an example of the types of requirements you should be collecting for each of the categories. It is important to know that this is **not an exhaustive list** of all functionality for an ATM system, but just a sample.
 
+---
 
+## System Components and Design
 
+### Purpose
+- This project is for one of our clients, a **banking institution**.  
+  The purpose is to make their customer services **easier and more efficient** as well as to provide customers with access to their accounts.
 
+### System Background
+- The client asked us to build a **system that enables customers to withdraw, deposit, and check account balances using an ATM card**.
+- The system, called an **ATM or automated teller machine**, will provide banking services to customers.
+- The system will consist of a **large machine** that is **connected to the central bank via internet**.
 
-Students to register, take practice tests, track progress, and schedule in-person training.
+---
 
+## Objectives and Goals
 
+The system will provide the user with the following functions:
+- Withdraw money
+- Deposit money
+- Print transactions
+- Check balance
 
-Instructors to manage sessions and submit feedback.
+---
 
+## Requirements
 
+### Functional Requirements
+- **ATM must lock card** after three failed attempts to enter PIN.
 
-Administrators to upload content, monitor activity, and generate reports.
+### Nonfunctional Requirements
+- The time it takes to **connect to the central bank**, retrieve information, and display it to the customer should **not exceed 10 seconds**.
+- Updates to the **ATM should be pushed from a central bank system** with the presence of a technician for backup.
 
+---
 
+## Performance Requirements
+- **Rationale**: Performance requirements capture the aspects of the system such as the **speed of different functions**, storage capacity, battery (if applicable), and updates.  
+  For an ATM, it would be important to have **quick transactions** to avoid user frustration and long lines.  
+  Since an ATM deals with **sensitive financial information**, updates should be made in a **very controlled way** to make sure that the updates are verified and that someone is on hand in case there are any issues.
 
-Secure payment processing for course fees.
+---
 
-This project involved creating a Business Requirements Document (Project One) and a System Design Document (Project Two), including UML diagrams (Use Case, Activity, Sequence, Class) to model the system’s functionality and structure.
+# UML Diagrams for ATM Cash Withdrawal
 
+## UML Activity Diagram
 
-
-What I Did Particularly Well
-
-I believe I excelled in translating the client’s vision into clear, structured UML diagrams. The Use Case Diagram effectively captured all user roles and key interactions, while the Activity Diagram for "Take Practice Exam" provided a logical, step-by-step flow that directly supports the goal of improving student preparation. My Class Diagram was well-organized with appropriate relationships (e.g., Student to Schedule, Course to Student via enrollment), showing a solid understanding of object-oriented design.
-
-
-
-One Area I’d Revise
-
-If I could revise one part, I would enhance the Sequence Diagram by including error handling paths (e.g., invalid login, payment failure). While the current version shows the happy path clearly, adding alternative flows would make it more comprehensive and realistic, better preparing developers for edge cases.
-
-
-
-Interpreting User Needs
-
-I interpreted the user’s needs by closely analyzing the DriverPass Interview Transcript and Business Requirements Document. For example:
-
-
-
-
-
-Liam emphasized online practice exams with feedback → led to detailed activity and sequence diagrams.
-
-
-
-Ian highlighted cloud backup and security → influenced technical requirements and security features.
-
-
-
-The need for progress tracking → resulted in a progressScore attribute in the Student class.
-
-Considering user needs is critical because a system that doesn’t solve real problems—even if technically sound—will fail. By prioritizing usability, accessibility, and security, the design ensures students, instructors, and admins can achieve their goals efficiently and safely.
-
-
-
-My Approach to Software Design
-
-I approach design with a user-centered, iterative process:
-
-
-
-
-
-Listen & Clarify – Conduct thorough requirement gathering (interviews, documents).
-
-
-
-Model Behavior – Use UML diagrams to visualize use cases, flows, interactions, and data structure.
-
-
-
-Validate – Cross-check designs against client goals and real-world constraints (budget, timeline).
-
-
-
-Simplify & Scale – Focus on core features first, design modularly for future growth.
-
-In the future, I’ll continue using Lucidchart for diagrams, GitHub for version control, and agile principles to refine designs based on feedback.
-
-
-
-Submitted Artifacts:
-
-
-
-
-
-CS255_DriverPass_BusinessRequirements.docx
-
-
-
-CS255_DriverPass_SystemDesignDocument.docx
-
-
-
-“Great systems begin with great understanding.” – This project reinforced that principle.
+```mermaid
+flowchart TD
+    A[Start] --> B[Verify PIN]
+    B -->|Wrong PIN| C[Wrong PIN]
+    B -->|Correct PIN| D[Ask for Amount]
+    D --> E{Amount Not Available}
+    E -->|Yes| F[Dispense Cash]
+    E -->|No| G[Amount Not Available]
+    F --> H[Generate Receipt]
+    H --> I[Print Receipt]
+    I --> J[End]
